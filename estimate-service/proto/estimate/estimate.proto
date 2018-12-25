@@ -1,0 +1,37 @@
+// estimate-service/proto/estimate/estimate.proto
+syntax = "proto3";
+
+package go.micro.srv.estimate;
+
+service EstimateService {
+  rpc CreateEstimate(Estimate) returns (Response) {}
+  rpc GetEstimates(GetRequest) returns (Response) {}
+}
+
+message Estimate {
+  string id = 1;
+  Customer customer = 2;
+  Estimator estimator = 4;
+  string address = 5;
+  string city = 6;
+  string state = 7;
+  string zip = 8;
+}
+
+message Customer {
+  string id = 1;
+}
+
+message Estimator {
+  string id = 1;
+}
+
+message Response {
+  bool created = 1;
+  Estimate estimate = 2;
+  repeated Estimate estimates = 3;
+}
+
+message GetRequest {}
+
+

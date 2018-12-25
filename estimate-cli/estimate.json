@@ -1,0 +1,12 @@
+{
+  "customer": {
+    "id": "cust001"
+  },
+  "estimator": {
+    "id": "emp001"
+  },
+  "address": "112 NE 5th Street Unit 1",
+  "city": "Fort Lauderdale",
+  "state": "Florida",
+  "zip": "33301"
+}
