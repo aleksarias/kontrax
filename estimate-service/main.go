@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"github.com/micro/go-micro"
 	// Import the generated protobuf code
-	pb "kontrax/estimate-service/proto/estimate"
+	pb "github.com/aleksarias/kontrax/estimate-service/proto/estimate"
 
 	"golang.org/x/net/context"
 )
@@ -47,7 +47,7 @@ type service struct {
 // CreateConsignment - we created just one method on our service,
 // which is a create method, which takes a context and a request as an
 // argument, these are handled by the gRPC server.
-func (s *service) CreateEstimate(ctx context.Context, req *pb.Estimate, res *pb.Response,)  error {
+func (s *service) CreateEstimate(ctx context.Context, req *pb.Estimate, res *pb.Response) error {
 
 	// Save our consignment
 	estimate, err := s.repo.Create(req)

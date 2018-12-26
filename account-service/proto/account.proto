@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package go.micro.srv.user;
+
+service AccountService {
+    rpc Create(Account) returns (Response) {}
+    rpc Get(Account) returns (Response) {}
+}
+
+message Account {
+    string id = 1;
+}
+
+message Response {
+    bool created = 1;
+    Account account = 2;
+    repeated Account accounts = 3;
+}

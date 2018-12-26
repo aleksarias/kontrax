@@ -1,4 +1,4 @@
-# estimate-service/Dockerfile
+# user-service/Dockerfile
 
 # We use the official golang image, which contains all the 
 # correct build tools and libraries. Notice `as builder`,
@@ -6,7 +6,7 @@
 FROM golang:1.9.0 as builder
 
 # Set our workdir to our current service in the gopath
-WORKDIR /Users/alexarias/go/src/github.com/aleksarias/kontrax/estimate-service
+WORKDIR /Users/alexarias/go/src/github.com/aleksarias/kontrax/user-service
 
 # Copy the current code into our workdir
 COPY . .
@@ -40,9 +40,9 @@ WORKDIR /app
 # we pull the binary from the container named `builder`, within
 # this build context. This reaches into our previous image, finds
 # the binary we built, and pulls it into this container. Amazing!
-COPY --from=builder /Users/alexarias/go/src/github.com/aleksarias/kontrax/estimate-service/estimate-service .
+COPY --from=builder /Users/alexarias/go/src/github.com/aleksarias/kontrax/user-service/user-service .
 
 # Run the binary as per usual! This time with a binary build in a
 # separate container, with all of the correct dependencies and
 # run time libraries.
-CMD ["./estimate-service"]
+CMD ["./user-service"]

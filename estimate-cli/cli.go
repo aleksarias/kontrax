@@ -7,8 +7,8 @@ import (
 	"log"
 	"os"
 
+	pb "github.com/aleksarias/kontrax/estimate-service/proto/estimate"
 	"golang.org/x/net/context"
-	pb "kontrax/estimate-service/proto/estimate"
 
 	microclient "github.com/micro/go-micro/client"
 	"github.com/micro/go-micro/cmd"

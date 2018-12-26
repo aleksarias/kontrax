@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package go.micro.srv.user;
+
+service UserService {
+    rpc Create(User) returns (Response) {}
+    rpc Get(User) returns (Response) {}
+    rpc GetUserAddresses(User) returns (Response) {}
+    rpc GetUserPhones(User) returns (Response) {}
+}
+
+message User {
+    string id = 1;
+    string first_name = 2;
+    string middle_name = 3;
+    string last_name = 4;
+    string email = 5;
+    string password = 6;
+    repeated UserPhone user_phones = 7;
+    repeated UserAddress user_addresses = 8;
+    string type = 9;
+    string role = 10;
+}
+
+message UserAddress {
+    string id = 1;
+    string address = 2;
+    string city = 3;
+    string state = 4;
+    string zip = 5;
+}
+
+message UserPhone {
+    string id = 1;
+    string phone_number = 2;
+    string ext = 3;
+    string phone_type = 4;
+}
+
+message Response {
+    bool created = 1;
+    User user = 2;
+    repeated User users = 3;
+}
+
+message GetRequest {}
+
