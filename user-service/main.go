@@ -34,7 +34,7 @@ func main() {
 	srv := k8s.NewService(
 
 		// This name must match the package name given in your protobuf definition
-		micro.Name("shippy.auth"),
+		micro.Name("kontrax.user"),
 	)
 
 	// Init will parse the command line flags.
@@ -44,7 +44,7 @@ func main() {
 	// publisher := micro.NewPublisher("user.created", srv.Client())
 
 	// Register handler
-	pb.RegisterAuthHandler(srv.Server(), &service{repo, tokenService})
+	pb.RegisterUserServiceHandler(srv.Server(), &service{repo, tokenService})
 
 	// Run the server
 	if err := srv.Run(); err != nil {

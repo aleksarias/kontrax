@@ -17,46 +17,6 @@ type service struct {
 	tokenService Authable
 }
 
-func (srv *service) Get(ctx context.Context, req *pb.User, res *pb.Response) error {
-	user, err := srv.repo.Get(req.Id)
-	if err != nil {
-		return err
-	}
-	res.User = user
-	return nil
-}
-
-func (srv *service) GetAll(ctx context.Context, req *pb.Request, res *pb.Response) error {
-	users, err := srv.repo.GetAll()
-	if err != nil {
-		return err
-	}
-	res.Users = users
-	return nil
-}
-
-func (srv *service) Auth(ctx context.Context, req *pb.User, res *pb.Token) error {
-	log.Println("Logging in with:", req.Email, req.Password)
-	user, err := srv.repo.GetByEmail(req.Email)
-	log.Println(user, err)
-	if err != nil {
-		return err
-	}
-
-	// Compares our given password against the hashed password
-	// stored in the database
-	if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(req.Password)); err != nil {
-		return err
-	}
-
-	token, err := srv.tokenService.Encode(user)
-	if err != nil {
-		return err
-	}
-	res.Token = token
-	return nil
-}
-
 func (srv *service) Create(ctx context.Context, req *pb.User, res *pb.Response) error {
 
 	log.Println("Creating user: ", req)
@@ -85,6 +45,64 @@ func (srv *service) Create(ctx context.Context, req *pb.User, res *pb.Response) 
 			return errors.New(fmt.Sprintf("error publishing event: %v", err))
 		}*/
 
+	return nil
+}
+
+func (srv *service) Get(ctx context.Context, req *pb.User, res *pb.Response) error {
+	user, err := srv.repo.Get(req.Id)
+	if err != nil {
+		return err
+	}
+	res.User = user
+	return nil
+}
+
+func (srv *service) GetUserAddresses(ctx context.Context, req *pb.User, res *pb.Response) error {
+	users, err := srv.repo.GetAll()
+	if err != nil {
+		return err
+	}
+	res.Users = users
+	return nil
+}
+
+func (srv *service) GetUserPhones(ctx context.Context, req *pb.User, res *pb.Response) error {
+	users, err := srv.repo.GetAll()
+	if err != nil {
+		return err
+	}
+	res.Users = users
+	return nil
+}
+
+func (srv *service) GetAll(ctx context.Context, req *pb.Request, res *pb.Response) error {
+	users, err := srv.repo.GetAll()
+	if err != nil {
+		return err
+	}
+	res.Users = users
+	return nil
+}
+
+func (srv *service) Authenticate(ctx context.Context, req *pb.User, res *pb.Token) error {
+	log.Println("Logging in with:", req.Email, req.Password)
+	user, err := srv.repo.GetByEmail(req.Email)
+	log.Println(user, err)
+	if err != nil {
+		return err
+	}
+
+	// Compares our given password against the hashed password
+	// stored in the database
+	if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(req.Password)); err != nil {
+		return err
+	}
+
+	token, err := srv.tokenService.Encode(user)
+	if err != nil {
+		return err
+	}
+	res.Token = token
 	return nil
 }
 

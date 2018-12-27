@@ -5,8 +5,11 @@ package go.micro.srv.user;
 service UserService {
     rpc Create(User) returns (Response) {}
     rpc Get(User) returns (Response) {}
+    rpc GetAll(Request) returns (Response) {}
     rpc GetUserAddresses(User) returns (Response) {}
     rpc GetUserPhones(User) returns (Response) {}
+    rpc Authenticate(User) returns (Token) {}
+    rpc ValidateToken(Token) returns (Token) {}
 }
 
 message User {
@@ -44,11 +47,23 @@ message Phone {
     string phone_type = 4;
 }
 
-message Response {
-    bool created = 1;
-    User user = 2;
-    repeated User users = 3;
+message Token {
+    string token = 1;
+    bool valid = 2;
+    repeated Error errors = 3;
 }
 
-message GetRequest {}
+message Error {
+    int32 code = 1;
+    string description = 2;
+}
+
+message Response {
+    User user = 1;
+    repeated User users = 2;
+    repeated Error errors = 3;
+    Token token = 4;
+}
+
+message Request {}
 
