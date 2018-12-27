@@ -1,8 +1,8 @@
 # Kontrax
 
-##Setup New Machine
+## Setup New Machine
 
-###Download and install protobuf compiler, protoc
+### Download and install protobuf compiler, protoc
 
 Download the appropriate release here: https://github.com/google/protobuf/releases
 
@@ -18,7 +18,7 @@ $ sudo make install
 $ which protoc
 $ protoc --version
 
-###Download and install gRPC and protoc plugin for Go 
+### Download and install gRPC and protoc plugin for Go 
 
 go get -u google.golang.org/grpc
 go get -u github.com/golang/protobuf/protoc-gen-go
