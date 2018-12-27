@@ -16,13 +16,20 @@ message User {
     string last_name = 4;
     string email = 5;
     string password = 6;
-    repeated UserPhone user_phones = 7;
-    repeated UserAddress user_addresses = 8;
+    repeated Phone phones = 7;
+    repeated PostalAddress addresses = 8;
     string type = 9;
     string role = 10;
+    Organization organization = 11;
 }
 
-message UserAddress {
+message Organization {
+    string id = 1;
+    string name = 2;
+    string phone_number = 3;
+}
+
+message PostalAddress {
     string id = 1;
     string address = 2;
     string city = 3;
@@ -30,7 +37,7 @@ message UserAddress {
     string zip = 5;
 }
 
-message UserPhone {
+message Phone {
     string id = 1;
     string phone_number = 2;
     string ext = 3;

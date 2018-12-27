@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package go.micro.srv.organization;
+
+service OrganizationService {
+    rpc Create(Organization) returns (Response) {}
+    rpc Get(Organization) returns (Response) {}
+    rpc GetOrganizationAddresses(Organization) returns (Response) {}
+    rpc GetOrganizationPhones(Organization) returns (Response) {}
+}
+
+
+message Organization {
+    string id = 1;
+    string name = 2;
+    string phone = 3;
+    string owner = 4;
+}
+
+message Response {
+
+}
