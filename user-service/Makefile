@@ -1,5 +1,6 @@
 build:
 	protoc -I. --go_out=plugins=micro:$(GOPATH)src/github.com/aleksarias/kontrax/user-service proto/user/user.proto
-	docker build -t user-service .
-run:
-	docker run -p 50051\:50051 -e MICRO_SERVER_ADDRESS=\:50051 -e MICRO_REGISTRY=mdns user-service
+	docker build -t us.gcr.io/kontrax/user-service:latest .
+	gcloud docker -- push us.gcr.io/kontrax/user-service:latest
+deploy:
+	kubectl replace -f ./deployments/*.yml

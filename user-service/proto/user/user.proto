@@ -23,7 +23,7 @@ message User {
     repeated PostalAddress addresses = 8;
     string type = 9;
     string role = 10;
-    Organization organization = 11;
+    string organization_id = 11;
 }
 
 message Organization {
@@ -38,6 +38,7 @@ message PostalAddress {
     string city = 3;
     string state = 4;
     string zip = 5;
+    string customer_id = 6;
 }
 
 message Phone {
@@ -45,12 +46,14 @@ message Phone {
     string phone_number = 2;
     string ext = 3;
     string phone_type = 4;
+    string customer_id = 5;
 }
 
 message Token {
     string token = 1;
     bool valid = 2;
-    repeated Error errors = 3;
+    string customer_id = 3;
+    repeated Error errors = 4;
 }
 
 message Error {

@@ -20,11 +20,9 @@ func main() {
 		log.Fatalf("Could not connect to DB: %v", err)
 	}
 
-	// Automatically migrates the user struct
-	// into database columns/types etc. This will
-	// check for changes and migrate them each time
-	// this service is restarted.
-	db.AutoMigrate(&pb.User{})
+	// Automatically migrates the all structs into database columns/types etc. This will
+	// check for changes and migrate them each time this service is restarted.
+	db.AutoMigrate(&pb.User{}, &pb.Phone{}, &pb.PostalAddress{}, &pb.Organization{})
 
 	repo := &UserRepository{db}
 

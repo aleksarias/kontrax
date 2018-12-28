@@ -1,0 +1,37 @@
+apiVersion: apps/v1beta2
+kind: StatefulSet
+metadata:
+  name: postgres
+spec:
+  serviceName: postgres-user
+  selector:
+    matchLabels:
+      app: postgres-user
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: postgres-user
+        role: postgres-user
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: postgres
+          image: postgres
+          ports:
+            - name: postgres
+              containerPort: 5432
+          volumeMounts:
+            - name: postgres-persistent-storage-user
+              mountPath: /var/lib/postgresql/data
+              subPath: postgres
+  volumeClaimTemplates:
+    - metadata:
+        name: postgres-persistent-storage-user
+        annotations:
+          volume.beta.kubernetes.io/storage-class: "fast"
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 10Gi
