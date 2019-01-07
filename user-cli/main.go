@@ -59,7 +59,7 @@ func main() {
 				FirstName:    name,
 				Email:        email,
 				Password:     password,
-				Organization: organization,
+				OrganizationId: organization,
 			})
 			if err != nil {
 				log.Fatalf("Could not create: %v", err)

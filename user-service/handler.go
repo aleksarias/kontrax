@@ -76,7 +76,9 @@ func (srv *service) GetUserPhones(ctx context.Context, req *pb.User, res *pb.Res
 }
 
 func (srv *service) GetAll(ctx context.Context, req *pb.Request, res *pb.Response) error {
+	log.Println("Getting all users")
 	users, err := srv.repo.GetAll()
+	log.Println("Found a total of ", len(users), " users")
 	if err != nil {
 		return err
 	}

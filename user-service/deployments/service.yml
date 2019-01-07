@@ -9,4 +9,4 @@ spec:
     - port: 8080
       protocol: TCP
   selector:
-    app: user
+    app: user-service
