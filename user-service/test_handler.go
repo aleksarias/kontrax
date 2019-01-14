@@ -3,20 +3,20 @@ package main
 import (
 	"context"
 	"fmt"
+	pb "github.com/aleksarias/kontrax/user-service/proto/user"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
-	pb "github.com/aleksarias/kontrax/user-service/proto/user"
 )
 
 // Create bogus database for testing
 func CreateBogusConnection() (*gorm.DB, error) {
 
-		return gorm.Open("sqlite3", "/tmp/gorm.db")
+	return gorm.Open("sqlite3", "/tmp/gorm.db")
 
 }
 
-func test_create_delete_user()  {
-	db, err := CreateBogusConnection();
+func test_create_delete_user() {
+	db, err := CreateBogusConnection()
 	if err != nil {
 		panic(err)
 	}
@@ -34,18 +34,18 @@ func test_create_delete_user()  {
 
 	address := pb.PostalAddress{
 		Address: "112 NE 5th Street Unit 1",
-		City: "Fort Lauderdale",
-		State: "Florida",
-		Zip: "33301",
+		City:    "Fort Lauderdale",
+		State:   "Florida",
+		Zip:     "33301",
 	}
 
-	addresses := [] *pb.PostalAddress {&address}
+	addresses := []*pb.PostalAddress{&address}
 
 	user := pb.User{
-		FirstName: "Alex",
-		LastName: "Arias",
+		FirstName:  "Alex",
+		LastName:   "Arias",
 		MiddleName: "Luis",
-		Addresses: addresses,
+		Addresses:  addresses,
 	}
 
 	response := pb.Response{}
@@ -63,6 +63,6 @@ func test_create_delete_user()  {
 
 }
 
-func main()  {
+func main() {
 	test_create_delete_user()
 }
